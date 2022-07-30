@@ -15,6 +15,9 @@ const currentPl0 = document.querySelector('#current--0');
 const currentPl1 = document.querySelector('#current--1');
 const body = document.querySelector('body');
 
+// Styles
+const darkEl = document.querySelector('#dark--0');
+
 let scores, currentScore, activePlayer, playing;
 
 const startCondition = function () {
@@ -36,6 +39,10 @@ const startCondition = function () {
   player1El.classList.remove('player--winner');
 };
 startCondition();
+
+setTimeout(() => {
+  darkEl.classList.toggle('hidden');
+}, 10000);
 
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
@@ -90,7 +97,6 @@ btnRoll.addEventListener('click', function () {
   if (playing) {
     // Generating a random number
     let dice = Math.trunc(Math.random() * 6) + 1;
-    console.log(dice);
 
     // Displaying number
     diceEl.classList.remove('hidden');

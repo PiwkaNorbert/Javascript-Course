@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700|Source+Sans+Pro:400,600,700&display=swap');
+
+:root {
+  /* Table Colors */
+  --red: #ff6666;
+  --red-darker: #b20000;
+  --orange: #ffb366;
+  --green: #8af88a;
+  --white: #fff;
+  --slider-bg: #ccc;
+  --bg-color: #ddeefc;
+  /* UI COLORS */
+  --pri-bg-color: #0c61a5;
+  --sec-bg-color: #3f3f3f;
+  --thrd-bg-color: #36304a;
+  --dark-color: #212121;
+  --dark-color-sec: #181818;
+  --lighter-dark-color-sec: #1b1b1b;
+  --line-color: #353535;
+  --pri-font: #1a1b1c;
+  --sec-font: #f9f9f9;
+  --table-row-even-color: #f5f5f5;
+  --thrd-font: #aaa;
+  --fourth-font: #bbb;
+}
+* {
+  /* Style */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+nav {
+  background: var(--bg-color);
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+body {
+  background: var(--white);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+  color: var(--pri-font);
+}
+.nav-position {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  box-shadow: 0 6px 10px 0 rgba(90, 116, 148, 0.4);
+}
+table {
+  border-collapse: collapse;
+  box-shadow: 0 6px 10px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
+  border: 1px solid var(--line-color);
+  border-radius: 10px;
+
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+
+  width: 75%;
+}
+table:focus {
+  box-shadow: 0 1px 3px 5px rgb(66 66 66 / 20%),
+    0 2px 8px 4px rgb(66 66 66 / 10%);
+}
+thead {
+  background-color: var(--thrd-bg-color);
+  color: var(--sec-font);
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: unset;
+  height: 50px;
+  contain: paint;
+  cursor: default;
+  position: -webkit-sticky; /* Safari */
+  top: 77.59px;
+}
+th,
+td {
+  padding: 6px 10px;
+  text-align: center;
+  font-weight: unset;
+}
+
+tbody tr {
+  font-size: 15px;
+  line-height: 1.2;
+  background-color: var(--white);
+  font-weight: unset;
+}
+
+tbody > tr {
+  background-color: var(--table-row-even-color);
+}
+tbody > tr:nth-child(2n + 1) {
+  background-color: var(--white);
+}
+tbody tr:hover {
+  background-color: var(--table-row-even-color);
+}
+tbody > tr td a {
+  color: var(--pri-font);
+  border-bottom: 1px dotted var(--pri-font);
+  text-decoration: none;
+}
+tbody > tr td a:hover {
+  color: var(--pri-bg-color);
+  border-bottom: 1px dotted var(--pri-bg-color);
+  text-decoration: none;
+}
+
+main {
+  background: linear-gradient(180deg, var(--bg-color), var(--white));
+  padding: 25px 0;
+}
+footer {
+  bottom: 0;
+  right: 0;
+}
+
+.ftr-container {
+  color: var(--pri-font);
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 87px;
+  padding: 12px 12px;
+}
+.ftr-container > span,
+.ftr-container a {
+  font-style: italic;
+  text-align: right;
+  font-size: 14px;
+  color: var(--pri-font);
+}
+.ftr-container > span:first-child,
+.ftr-container a:first-child {
+  text-align: left;
+}
+
+.ftr-container > span:last-child,
+.ftr-container a:last-child {
+  text-align: right;
+}
+
+.ftr-container > span:first-child {
+  font-weight: 700;
+}
+
+.hidden {
+  display: none;
+  -webkit-transform: translateX(21px);
+  -ms-transform: translateX(21px);
+  transform: translateX(21px);
+}
+.red {
+  background-color: var(--red) !important;
+  color: var(--pri-font) !important;
+}
+.red-darker {
+  background-color: var(--red-darker) !important;
+}
+.orange {
+  background-color: var(--orange) !important;
+  color: var(--pri-font) !important;
+}
+.green {
+  background-color: var(--green) !important;
+  color: var(--pri-font) !important;
+}
+
+.toggle-position {
+  display: flex;
+  align-items: center;
+}
+.toggle-position > span {
+  padding-right: 10px;
+}
+.btn {
+  background-color: var(--white);
+  width: 50px;
+  height: 28px;
+  border-radius: 10em;
+  padding: 0 0.3em;
+
+  box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.1),
+    inset 0 4px 4px rgba(0, 0, 0, 0.1), inset 0 -3px 4px rgba(0, 0, 0, 0.1);
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn-indicator {
+  background-color: var(--white);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+  position: absolute;
+
+  -webkit-transition: transform 0.4s ease;
+  transition: transform 0.4s ease;
+}
+.btn-icon-container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-icon {
+  font-size: 10px;
+  color: var(--pri-font);
+}
+
+/*--------- COLORED TABLE  ----------*/
+.btn-colored {
+  background-color: var(--red);
+}
+.btn-dm-colored {
+  color: var(--sec-font);
+  opacity: 1;
+}
+.btn-cp-colored .btn-cp-indicator {
+  background-color: var(--bg-color);
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+.btn-colored .btn-indicator,
+.btn-dm-colored .btn-dm-indicator,
+.btn-cp-colored .btn-cp-indicator {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+
+.add-lib-form {
+  padding-bottom: 100px;
+}
+@media only screen and (max-width: 800px) {
+  table {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+/* ----------DARK MODE---------- */
+nav.darkmode {
+  background-color: var(--dark-color);
+}
+.logo.darkmdoe {
+  filter: invert(100%) sepia(5%) saturate(0%) hue-rotate(0deg) brightness(160%)
+    contrast(95%);
+}
+.nav-position.darkmode {
+  box-shadow: none;
+  border-bottom: 1px solid var(--line-color);
+}
+html.darkmode {
+  background-color: var(--dark-color);
+}
+main.darkmode,
+body.darkmode {
+  background: linear-gradient(180deg, var(--dark-color-sec), var(--dark-color));
+}
+table.darkmode {
+  box-shadow: none;
+}
+table.darkmode > thead {
+  background-color: var(--dark-color);
+}
+table.darkmode > tbody > tr {
+  background-color: var(--dark-color-sec);
+  color: var(--thrd-font);
+}
+table.darkmode > tbody > tr > td > a {
+  color: var(--primary-font);
+}
+
+table.darkmode > tbody > tr:nth-child(2n + 1) {
+  background-color: var(--lighter-dark-color-sec);
+}
+nav.darkmode > div > div > span {
+  color: var(--sec-font);
+}
+footer.darkmode {
+  border-top: 1px solid var(--line-color);
+}
+footer.darkmode > div > span,
+footer.darkmode > div > span > a {
+  color: var(--thrd-font);
+}
+
+.odd {
+  background-color: var(--table-row-even-color);
+}
+
+.even {
+  background-color: var(--white);
+}

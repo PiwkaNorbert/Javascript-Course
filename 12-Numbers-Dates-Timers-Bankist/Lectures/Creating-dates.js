@@ -35,9 +35,13 @@
 // console.log(days1);
 
 const num = 4124214.23;
-const options = { style: 'unit' };
-console.log(`US`, new Intl.NumberFormat('en-US').format(num));
-console.log(`Ger`, new Intl.NumberFormat('de-DE').format(num));
-console.log(`Poland`, new Intl.NumberFormat('pl-pl').format(num));
-console.log(`Syria`, new Intl.NumberFormat('ar-SY').format(num));
-console.log(`Browser`, new Intl.NumberFormat(navigator.language).format(num));
+const options = { style: 'unit', unit: 'mile-per-hour' };
+
+console.log(`US: `, new Intl.NumberFormat('en-US', options).format(num));
+console.log(`Ger: `, new Intl.NumberFormat('de-DE', options).format(num));
+console.log(`Poland: `, new Intl.NumberFormat('pl-pl', options).format(num));
+console.log(`Syria: `, new Intl.NumberFormat('ar-SY', options).format(num));
+console.log(
+  navigator.language,
+  new Intl.NumberFormat(navigator.language, options).format(num)
+);

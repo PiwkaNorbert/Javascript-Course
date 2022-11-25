@@ -57,12 +57,28 @@ btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-document.querySelectorAll('.nav__link').forEach(function (el) {
-  el.addEventListener('click', function () {
-    console.log('LINK');
-    this.scrollIntoView({ behavior: 'smooth' });
-  });
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// Even delegarion
+// 1. add event listern to common parent element
+// 2. Determin when element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  // mathcing strategy
+
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
 });
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////

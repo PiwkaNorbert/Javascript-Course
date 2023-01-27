@@ -64,20 +64,18 @@ btnScrollTo.addEventListener('click', function (e) {
 //     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
 //   });
 // });
-
 // Even delegarion
 // 1. add event listern to common parent element
 // 2. Determin when element originated the event
 
-document.querySelector('.nav__links').addEventListener('click', function (e) {
-  e.preventDefault();
-  // mathcing strategy
-
-  if (e.target.classList.contains('nav__link')) {
-    const id = e.target.getAttribute('href');
-    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-  }
-});
+document.querySelector('.nav__links').addEventListener('click', function(e){
+e.preventDefault()
+//matching
+if(e.target.classList.contains('nav__link')){
+  const id = e.target.getAttribute('href');
+  document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+}
+})
 
 ///////////////////////////////////////
 ///////////////////////////////////////
@@ -204,3 +202,4 @@ document.querySelector('.nav').addEventListener(
 );
 //
 */
+// rgb(255,255,255)

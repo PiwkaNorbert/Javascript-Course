@@ -78,8 +78,6 @@ const h1 = document.querySelector('h1');
 
 console.dir(x => x + 1);
 
-*/
-/*
 
 ////////////////////////////////
 
@@ -143,6 +141,8 @@ jessica.greet();
 const walter = new PersonCl('Walter', 1994);
 
 PersonCl.hey();
+*/
+
 /*
 const account = {
   owner : 'Norbert',
@@ -181,11 +181,10 @@ const sarah = Object.create(PersonProto);
 
 sarah.init('Sarah', 1979);
 sarah.calcAge();
-*/
 
 ////////////////////////////////////////////
 
-// Inheritance between "Classes" Constructor function
+// Inheritance between "Classes": Constructor function
 const Person = function (firstName, birthYear) {
   this.birthYear = birthYear;
   this.firstName = firstName;
@@ -220,3 +219,120 @@ console.log(mike instanceof Person);
 Student.prototype.constructor = Student;
 
 console.dir(Student.prototype.constructor);
+
+// Inheritance between "Classes": Classes
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // PersonCl.call()
+    super(fullName, birthYear); // Always needs to happen first!
+    this.course = course;
+  }
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+  calcAge() {
+    console.log(
+      `I am ${
+        2037 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2037 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+const marta = new StudentCl('Marta Jones', 2012, 'Administrator');
+
+marta.introduce();
+marta.calcAge();
+
+// Inheritance between "Classes": Object.create
+
+//
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+const steven = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2010, 'IT');
+jay.introduce();
+jay.calcAge();
+*/
+
+// Public fields
+// Private fields
+// Public Methods
+// Private methods
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this._pin = pin;
+    // Protected property
+    this._movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  // Public interface
+
+  getMovements() {
+    return this._movements;
+  }
+  deposit(val) {
+    this._movements.push(val);
+  }
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  _approveLoan(val) {
+    return true;
+  }
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+}
+const acc1 = new Account('Norbert', 'EUR', 1111, []);
+console.log(acc1);
+
+// acc1._movements.push(250);
+// acc1._movements.push(-150);
+acc1.deposit(280);
+acc1.withdraw(100);
+console.log(acc1);
+
+const Mateusz = new Account('Mateusz', 'USD', 2137, []);
+
+Mateusz.withdraw(500);
+Mateusz.deposit(1000);
+Mateusz.requestLoan(2000);
+acc1._approveLoan(1000);
+
+console.log(acc1.getMovements());
+
+console.log(Mateusz);
+console.log(acc1.pin);

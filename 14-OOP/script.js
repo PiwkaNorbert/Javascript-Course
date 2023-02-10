@@ -277,50 +277,64 @@ jay.introduce();
 jay.calcAge();
 */
 
-// Public fields
-// Private fields
-// Public Methods
-// Private methods
+// 1). Public fields
+// 2). Private fields
+// 3). Public Methods
+// 4). Private methods
 
 class Account {
+  // 1). Public Fields (instances)
+  locale = navigator.language;
+
+  // 2). Private fields
+  #movements = [];
+  #pin; // Needs to be declared before the constructor
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this._pin = pin;
     // Protected property
-    this._movements = [];
-    this.locale = navigator.language;
+    this.#pin = pin;
+
+    // this._movements = [];
+    // this.locale = navigator.language;
 
     console.log(`Thanks for opening an account, ${owner}`);
   }
 
-  // Public interface
+  // 3). Public Methods (Public interface)
 
   getMovements() {
-    return this._movements;
+    return this.#movements;
   }
   deposit(val) {
-    this._movements.push(val);
+    this.#movements.push(val);
+    return this;
   }
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
-  _approveLoan(val) {
-    return true;
-  }
   requestLoan(val) {
-    if (this._approveLoan(val)) {
+    // if (this._approveLoan(val)) { // Protected
+    if (this.#approveLoan(val)) {
       this.deposit(val);
-      console.log(`Loan approved`);
+      console.log(`Loan approved ${this.owner} for ${val}`);
+      return this;
     }
+  }
+
+  // 4). Private methods
+  // _approveLoan(val) { // Protected
+  #approveLoan(val) {
+    return true;
   }
 }
 const acc1 = new Account('Norbert', 'EUR', 1111, []);
 console.log(acc1);
 
-// acc1._movements.push(250);
-// acc1._movements.push(-150);
+// acc1.#movements.push(250);
+// acc1.#movements.push(-150);
 acc1.deposit(280);
 acc1.withdraw(100);
 console.log(acc1);
@@ -330,9 +344,31 @@ const Mateusz = new Account('Mateusz', 'USD', 2137, []);
 Mateusz.withdraw(500);
 Mateusz.deposit(1000);
 Mateusz.requestLoan(2000);
-acc1._approveLoan(1000);
 
 console.log(acc1.getMovements());
 
 console.log(Mateusz);
 console.log(acc1.pin);
+
+// console.log(acc1.#movements);
+
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(400);
+console.log(acc1.getMovements());
+
+// Coding Challenge #4
+
+/* 
+1. Use a constructor function to implement an Electric Car (called EV) as a CHILD "class" of Car. Besides a make and current speed, the EV also has the current battery charge in % ('charge' property);
+2. Implement a 'chargeBattery' method which takes an argument 'chargeTo' and sets the battery charge to 'chargeTo';
+3. Implement an 'accelerate' method that will increase the car's speed by 20, and decrease the charge by 1%. Then log a message like this: 'Tesla going at 140 km/h, with a charge of 22%';
+4. Create an electric car object and experiment with calling 'accelerate', 'brake' and 'chargeBattery' (charge to 90%). Notice what happens when you 'accelerate'! 
+/////////////////
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+
+*/

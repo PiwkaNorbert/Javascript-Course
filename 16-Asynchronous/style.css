@@ -70,6 +70,8 @@ body {
   background-color: #eee;
   border-top-left-radius: 0.7rem;
   border-top-right-radius: 0.7rem;
+  border-radius: 16px;
+  filter: saturate(1.2) grayscale(0.1);
 }
 
 .country__data {

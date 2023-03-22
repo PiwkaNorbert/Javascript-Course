@@ -126,3 +126,15 @@ body {
   border: 3rem solid white;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem;
+}
+.form input {
+  height: 30px;
+}
+.form input:not(:first-child) {
+  margin-bottom: 2rem;
+}

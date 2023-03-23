@@ -158,57 +158,62 @@ setTimeout(() => {
 ///////////////////////// Challenege 1 //////////////////////////
 /* Get latitude and longitude from two inputs and redner a country based on those coords */
 
-const getJSON = function (url, errorMsg = 'Something went wrong') {
-  return fetch(url).then(response => {
-    if (!response.ok) {
-      throw new Error(`${errorMsg} ${response.status}`);
-    }
-    return response.json();
-  });
-};
+// const getJSON = function (url, errorMsg = 'Something went wrong') {
+//   return fetch(url).then(response => {
+//     if (!response.ok) {
+//       throw new Error(`${errorMsg} ${response.status}`);
+//     }
+//     return response.json();
+//   });
+// };
 
-const getCountryData = function (country) {
-  getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
-    .then(data => {
-      renderCountry(data[0]);
-      console.log(data[0]);
-      const neighbour = data[0].borders?.[0];
+// const getCountryData = function (country) {
+//   getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
+//     .then(data => {
+//       renderCountry(data[0]);
+//       console.log(data[0]);
+//       const neighbour = data[0].borders?.[0];
 
-      if (!neighbour) throw new Error(`No Neighbour found!`);
-      // country 2
-      return getJSON(
-        `https://restcountries.com/v2/alpha/${neighbour}`,
-        'Country not found'
-      );
-    })
-    .then(data => renderCountry(data, 'neighbour'))
-    .catch(err => {
-      console.error(err);
-      renderError(`Something went wrong 💣💣💣 ${err.message}. Try Again! `);
-    })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;
-    });
-};
-document.querySelector('.form').addEventListener('submit', e => {
-  e.preventDefault();
-});
+//       if (!neighbour) throw new Error(`No Neighbour found!`);
+//       // country 2
+//       return getJSON(
+//         `https://restcountries.com/v2/alpha/${neighbour}`,
+//         'Country not found'
+//       );
+//     })
+//     .then(data => renderCountry(data, 'neighbour'))
+//     .catch(err => {
+//       console.error(err);
+//       renderError(`Something went wrong 💣💣💣 ${err.message}. Try Again! `);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+// document.querySelector('.form').addEventListener('submit', e => {
+//   e.preventDefault();
+// });
 
-btn.addEventListener('click', function () {
-  const Latitude = document.querySelector('.latitude').value;
-  const Longitude = document.querySelector('.longitude').value;
-  console.log(Latitude, Longitude);
-  whereAmI(Latitude, Longitude);
-});
+// btn.addEventListener('click', function () {
+//   const Latitude = document.querySelector('.latitude').value;
+//   const Longitude = document.querySelector('.longitude').value;
+//   console.log(Latitude, Longitude);
+//   whereAmI(Latitude, Longitude);
+// });
 
-const whereAmI = function (lat, lng) {
-  getJSON(
-    `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=en`,
-    `Data not found`
-  )
-    .then(data => getCountryData(data.address.country))
-    .catch(err => {
-      console.error(err);
-      renderError(`Something went wrong ${err.message}. Try again`);
-    });
-};
+// const whereAmI = function (lat, lng) {
+//   getJSON(
+//     `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=en`,
+//     `Data not found`
+//   )
+//     .then(data => getCountryData(data.address.country))
+//     .catch(err => {
+//       console.error(err);
+//       renderError(`Something went wrong ${err.message}. Try again`);
+//     });
+// };
+
+console.log('test staqr');
+setTimeout(() => console.log('0 sec timer'), 0);
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+console.log('hier');

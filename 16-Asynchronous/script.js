@@ -28,6 +28,16 @@ const renderCountry = function (data, className = '') {
   countriesContainer.insertAdjacentHTML('beforeend', html);
   // countriesContainer.style.opacity = 1;
 };
+
+const getJSON = async function (url, errorMsg = `Something went wrong`) {
+  return fetch(url).then(res => {
+    if (!res.ok) {
+      throw new Error(`${errorMsg} ${res.status}`);
+    }
+    return res.json();
+  });
+};
+
 ///////////////////////////////////////
 // https://restcountries.com/v2/
 /*
@@ -158,15 +168,6 @@ setTimeout(() => {
 ///////////////////////// Challenege 1 //////////////////////////
 /* Get latitude and longitude from two inputs and redner a country based on those coords */
 
-// const getJSON = function (url, errorMsg = 'Something went wrong') {
-//   return fetch(url).then(response => {
-//     if (!response.ok) {
-//       throw new Error(`${errorMsg} ${response.status}`);
-//     }
-//     return response.json();
-//   });
-// };
-
 // const getCountryData = function (country) {
 //   getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
 //     .then(data => {
@@ -213,7 +214,245 @@ setTimeout(() => {
 //     });
 // };
 
-console.log('test staqr');
-setTimeout(() => console.log('0 sec timer'), 0);
-Promise.resolve('Resolved promise 1').then(res => console.log(res));
-console.log('hier');
+// console.log('test staqr');
+// setTimeout(() => console.log('0 sec timer'), 0);
+// Promise.resolve('Resolved promise 1').then(res => console.log(res));
+
+// Promise.resolve('Resolved promise 2').then(res => {
+//   for (let i = 0; i < 10000; i++) {}
+//   console.log(res);
+// });
+// console.log('hier');
+
+////////////////////////////////////////////////////////////////////
+
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   console.log('Lottery draw is happening 🔮');
+//   setTimeout(() => {
+//     if (Math.random() >= 0.5) {
+//       resolve('You win');
+//     } else {
+//       reject(new Error('You lose your money 👀'));
+//     }
+//   }, 2000);
+// });
+// lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+// // Promisifying setTimeout
+// const wait = seconds =>
+//   new Promise(resolve => setTimeout(resolve, seconds * 1000));
+
+// wait(2)
+//   .then(() => {
+//     console.log('I waited for 2 seconds');
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log('I waited for 1 second');
+//   })
+//   .then(() => {
+//     console.log('I waited for 1 second');
+//   })
+//   .then(() => {
+//     console.log('I waited for 1 second');
+//   });
+
+// Promise.resolve('abc').then(res => console.log(res));
+// Promise.reject(new Error('er')).catch(res => console.error(res));
+
+///////////////////////////////////////////////////////////////////////
+
+// const getPosition = function () {
+//   console.log('Getting position');
+//   return new Promise(function (resolve, reject) {
+//     // navigator.geolocation.getCurrentPosition(
+//     //   position => resolve(position),
+//     //   error => reject(error)
+//     // );
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+
+// const whereAmI = function () {
+//   getPosition()
+//     .then(pos => {
+//       const { latitude: lat, longitude: lng } = pos.coords;
+//       return getJSON(
+//         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=en`,
+//         `Data not found`
+//       );
+//     })
+//     .then(data => {
+//       console.log(`You are in ${data.address.city}, ${data.address.country} `);
+//       return getJSON(
+//         `https://restcountries.com/v2/name/${data.address.country}`,
+//         'Country not found'
+//       );
+//     })
+//     .then(data => renderCountry(data[0]))
+//     .catch(err => {
+//       console.error(err);
+//       renderError(`Something went wrong ${err.message}. Try again`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+// btn.addEventListener('click', whereAmI);
+
+// const getCountryData = function (country) {
+//   getJSON(`https://restcountries.com/v2/name/${country}`, 'Country not found')
+//     .then(data => {
+//       renderCountry(data[0]);
+//       console.log(data[0]);
+//       const neighbour = data[0].borders?.[0];
+
+//       if (!neighbour) throw new Error(`No Neighbour found!`);
+//       // country 2
+//       return getJSON(
+//         `https://restcountries.com/v2/alpha/${neighbour}`,
+//         'Country not found'
+//       );
+//     })
+//     .then(data => renderCountry(data, 'neighbour'))
+//     .catch(err => {
+//       console.error(err);
+//       renderError(`Something went wrong 💣💣💣 ${err.message}. Try Again! `);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+
+const getPosition = function () {
+  console.log('Getting position');
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   error => reject(error)
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+// const whereAmI = function () {
+//   getPosition()
+//     .then(pos => {
+//       const { latitude: lat, longitude: lng } = pos.coords;
+//       return getJSON(
+//         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=en`,
+//         `Data not found`
+//       );
+//     })
+//     .then(data => {
+//       console.log(`You are in ${data.address.city}, ${data.address.country} `);
+//       return getJSON(
+//         `https://restcountries.com/v2/name/${data.address.country}`,
+//         'Country not found'
+//       );
+//     })
+//     .then(data => renderCountry(data[0]))
+//     .catch(err => {
+//       console.error(err);
+//       renderError(`Something went wrong ${err.message}. Try again`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+
+// const whereAmI = async function () {
+//   try {
+//     // Geolocation
+//     const pos = await getPosition();
+//     const { latitude: lat, longitude: lng } = pos.coords;
+//     // Reverse geocoding
+//     const resGeo = await fetch(
+//       `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=en`
+//     );
+//     if (!resGeo.ok) throw new Error(`Problem getting location data`);
+//     const dataGeo = await resGeo.json();
+//     // Country Data
+//     const res = await fetch(
+//       `https://restcountries.com/v2/name/${dataGeo.address.country}`
+//     );
+//     if (!res.ok) throw new Error(`Problem getting country data`);
+
+//     const data = await res.json();
+//     renderCountry(data[0]);
+//     countriesContainer.style.opacity = 1;
+//   } catch (err) {
+//     console.error(err.message);
+//     renderError(`Something went wrong ${err.message}`);
+
+//     // reject promise returned from async
+//     throw err;
+//   }
+// };
+// (async function () {
+//   try {
+//     const location = await whereAmI();
+//     console.log(location);
+//   } catch (error) {
+//     console.error(error.message);
+//     renderError(`Something went wrong ${error.message}`);
+
+//     // reject promise returned from async
+//     throw error;
+//   } finally {
+//     console.log('code');
+//   }
+// })();
+
+const countryURL = `https://restcountries.com/v2/name/`;
+// const get3Countries = async function (c1, c2, c3) {
+//   try {
+//     const data = await Promise.all([
+//       getJSON(`${countryURL}${c1}`),
+//       getJSON(`${countryURL}${c2}`),
+//       getJSON(`${countryURL}${c3}`),
+//     ]);
+
+//     console.log(data.map(data => data[0].capital));
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+// get3Countries('portugal', 'canada', 'poland');
+
+(async function () {
+  const data = await Promise.race([
+    getJSON(`${countryURL}italy`),
+    getJSON(`${countryURL}poland`),
+    getJSON(`${countryURL}canada`),
+  ]);
+  console.log(data[0]);
+})();
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('Request took too long'));
+    }, sec * 1000);
+  });
+};
+
+// Promise.race
+Promise.race([getJSON(`${countryURL}egypt`), timeout(1)])
+  .then(res => console.log(res[0]))
+  .catch(err => console.error(err));
+
+// Promise.allSettled
+Promise.allSettled([
+  Promise.resolve('success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('another Success'),
+]).then(res => console.log(res));
+
+// Promise.any [ES2021]
+
+Promise.any([
+  Promise.resolve('success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('another Success'),
+]).then(res => console.log(res));

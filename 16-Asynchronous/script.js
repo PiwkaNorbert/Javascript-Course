@@ -405,54 +405,54 @@ const getPosition = function () {
 // })();
 
 const countryURL = `https://restcountries.com/v2/name/`;
-// const get3Countries = async function (c1, c2, c3) {
-//   try {
-//     const data = await Promise.all([
-//       getJSON(`${countryURL}${c1}`),
-//       getJSON(`${countryURL}${c2}`),
-//       getJSON(`${countryURL}${c3}`),
-//     ]);
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    const data = await Promise.all([
+      getJSON(`${countryURL}${c1}`),
+      getJSON(`${countryURL}${c2}`),
+      getJSON(`${countryURL}${c3}`),
+    ]);
 
-//     console.log(data.map(data => data[0].capital));
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-// get3Countries('portugal', 'canada', 'poland');
-
-(async function () {
-  const data = await Promise.race([
-    getJSON(`${countryURL}italy`),
-    getJSON(`${countryURL}poland`),
-    getJSON(`${countryURL}canada`),
-  ]);
-  console.log(data[0]);
-})();
-
-const timeout = function (sec) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error('Request took too long'));
-    }, sec * 1000);
-  });
+    console.log(data.map(data => data[0].capital));
+  } catch (error) {
+    console.error(error);
+  }
 };
+get3Countries('portugal', 'canada', 'poland');
 
-// Promise.race
-Promise.race([getJSON(`${countryURL}egypt`), timeout(1)])
-  .then(res => console.log(res[0]))
-  .catch(err => console.error(err));
+// (async function () {
+//   const data = await Promise.race([
+//     getJSON(`${countryURL}italy`),
+//     getJSON(`${countryURL}poland`),
+//     getJSON(`${countryURL}canada`),
+//   ]);
+//   console.log(data[0]);
+// })();
 
-// Promise.allSettled
-Promise.allSettled([
-  Promise.resolve('success'),
-  Promise.reject('ERROR'),
-  Promise.resolve('another Success'),
-]).then(res => console.log(res));
+// const timeout = function (sec) {
+//   return new Promise(function (_, reject) {
+//     setTimeout(function () {
+//       reject(new Error('Request took too long'));
+//     }, sec * 1000);
+//   });
+// };
 
-// Promise.any [ES2021]
+// // Promise.race
+// Promise.race([getJSON(`${countryURL}egypt`), timeout(1)])
+//   .then(res => console.log(res[0]))
+//   .catch(err => console.error(err));
 
-Promise.any([
-  Promise.resolve('success'),
-  Promise.reject('ERROR'),
-  Promise.resolve('another Success'),
-]).then(res => console.log(res));
+// // Promise.allSettled
+// Promise.allSettled([
+//   Promise.resolve('success'),
+//   Promise.reject('ERROR'),
+//   Promise.resolve('another Success'),
+// ]).then(res => console.log(res));
+
+// // Promise.any [ES2021]
+
+// Promise.any([
+//   Promise.resolve('success'),
+//   Promise.reject('ERROR'),
+//   Promise.resolve('another Success'),
+// ]).then(res => console.log(res));

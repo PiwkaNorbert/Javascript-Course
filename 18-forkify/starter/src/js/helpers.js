@@ -17,6 +17,6 @@ export const getJSON = async function (url) {
 
     return data;
   } catch (error) {
-    throw new Error(`${error} kambob`);
+    throw `${error} kambob`;
   }
 };
